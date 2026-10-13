@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smile Gallery of Austin | Dr. Ahmadian</title>
+    <style>
+        /* =========================================
+           GLOBAL STYLES & VARIABLES
+        ========================================= */
+        :root {
+            --primary-blue: #0A3659;
+            --accent-blue: #1A75B8;
+            --cta-color: #E67E22;
+            --text-dark: #333333;
+            --bg-light: #F8F9FA;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* =========================================
+           1. STICKY NAVIGATION (Integrated Booking)
+        ========================================= */
+        nav {
+            position: sticky;
+            top: 0;
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            margin: 0 1rem;
+            font-weight: 500;
+        }
+
+        .btn-cta {
+            background: var(--cta-color);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn-cta:hover { background: #d35400; }
+
+        /* =========================================
+           2. HERO SECTION (Native Video & ZocDoc)
+        ========================================= */
+        .hero {
+            position: relative;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            overflow: hidden;
+        }
+
+        /* Native auto-playing background video */
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translateX(-50%) translateY(-50%);
+            z-index: -2;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10, 54, 89, 0.7); /* Blue tint overlay */
+            z-index: -1;
+        }
+
+        .hero-content {
+            z-index: 1;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+        
+        /* ZocDoc Embedded Widget Placeholder */
+        .zocdoc-widget-container {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            color: var(--text-dark);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* =========================================
+           3. HIGH-TICKET FUNNELS (Implants/Veneers)
+        ========================================= */
+        .services-funnel {
+            padding: 5rem 5%;
+            background: var(--bg-light);
+            text-align: center;
+        }
+
+        .funnel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .funnel-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        /* Before/After Image Styling */
+        .before-after-container {
+            display: flex;
+            height: 250px;
+            background: #ddd;
+        }
+        .before-after-container div {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+            background-size: cover;
+            background-position: center;
+        }
+        .before-img { background: url('https://via.placeholder.com/400x300/aa0000/ffffff?text=Before') }
+        .after-img { background: url('https://via.placeholder.com/400x300/00aa00/ffffff?text=After') }
+
+        .funnel-card h3 { padding: 1rem; color: var(--primary-blue); }
+        .funnel-card p { padding: 0 1rem 1.5rem; }
+
+        /* =========================================
+           4. SOCIAL PROOF (Google Reviews)
+        ========================================= */
+        .reviews {
+            padding: 5rem 5%;
+            text-align: center;
+        }
+        .reviews h2 { margin-bottom: 3rem; }
+        .review-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .review-card {
+            padding: 1.5rem;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            text-align: left;
+            position: relative;
+        }
+        .stars { color: #fbbc04; font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .reviewer-info {
+            display: flex;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        .reviewer-info img {
+            width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;
+        }
+
+        /* =========================================
+           5. SECURE CONTACT FORM
+        ========================================= */
+        .contact-section {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 5rem 5%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-form {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            color: var(--text-dark);
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .hipaa-badge {
+            display: flex;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #27ae60;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        /* =========================================
+           6. MODERN FOOTER & DYNAMIC COPYRIGHT
+        ========================================= */
+        footer {
+            background: #062238;
+            color: #aaa;
+            padding: 3rem 5% 1rem;
+            text-align: center;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+        .footer-content h4 { color: var(--white); margin-bottom: 1rem; }
+        .ada-badge {
+            display: inline-block;
+            border: 1px solid #aaa;
+            padding: 5px 10px;
+            margin-top: 1rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        /* =========================================
+           7. MOBILE "TAP TO CALL" STICKY BAR
+        ========================================= */
+        .mobile-sticky-bar {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-sticky-bar {
+                display: flex;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                z-index: 2000;
+                box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+            }
+            .mobile-btn {
+                flex: 1;
+                padding: 1rem;
+                text-align: center;
+                font-weight: bold;
+                text-decoration: none;
+                color: var(--white);
+                font-size: 1.1rem;
+            }
+            .btn-call { background: var(--accent-blue); }
+            .btn-book { background: var(--cta-color); }
+
+            /* Adjust body to prevent content from hiding under mobile bar */
+            body { padding-bottom: 60px; }
+            .contact-section { grid-template-columns: 1fr; }
+            .nav-links { display: none; /* simple mobile nav hide for demo */ }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Integrated Online Booking (Sticky Nav) -->
+    <nav>
+        <div class="logo">Smile Gallery of Austin</div>
+        <div class="nav-links">
+            <a href="#services">Services</a>
+            <a href="#reviews">Reviews</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <a href="https://www.zocdoc.com/" target="_blank" class="btn-cta">Book Appointment Online</a>
+    </nav>
+
+    <!-- 2. Hero Section with Native Background Video & ZocDoc Embed -->
+    <header class="hero">
+        <!-- Replaces embedded YouTube player -->
+        <video class="hero-video" autoplay loop muted playsinline>
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        
+        <div class="hero-content">
+            <h1>Expert Dental Care in Austin</h1>
+            <p>Experience pain-free dentistry with Dr. Ahmadian.</p>
+            
+            <!-- ZocDoc Widget Container -->
+            <div class="zocdoc-widget-container">
+                <h3>Book Instantly</h3>
+                <p style="font-size: 0.9rem; margin-bottom: 15px;">Powered by ZocDoc</p>
+                <!-- Simply paste the actual ZocDoc script/iframe here -->
+                <a href="#" class="btn-cta" style="display: block; width: 100%;">See Availability</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3. High-Ticket Service Funnels -->
+    <section id="services" class="services-funnel">
+        <h2>Transform Your Smile</h2>
+        <p>Premium cosmetic solutions tailored to you.</p>
+        
+        <div class="funnel-grid">
+            <!-- Veneers Funnel -->
+            <div class="funnel-card">
+                <div class="before-after-container">
+                    <div class="before-img">Before</div>
+                    <div class="after-img">After</div>
+                </div>
+                <h3>Porcelain Veneers</h3>
+                <p>Fix chips, gaps, and stains in just two visits. Find out if you're a candidate.</p>
+                <a href="#" class="btn-cta" style="margin-bottom: 1.5rem; display: inline-block;">View Veneers Gallery</a>
+            </div>
+            
+            <!-- Implants Funnel -->
+            <div class="funnel-card">
+                <div class="before-after-container">
+                    <div class="before-img">Before</div>
+                    <div class="after-img">After</div>
+                </div>
+                <h3>Dental Implants</h3>
+                <p>Permanent, natural-looking replacements for missing teeth. Book a consultation.</p>
+                <a href="#" class="btn-cta" style="margin-bottom: 1.5rem; display: inline-block;">Learn About Implants</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Dynamic Social Proof -->
+    <section id="reviews" class="reviews">
+        <h2>Real Patients. Real Results.</h2>
+        <div class="review-grid">
+            <!-- Simulated Google Reviews Widget -->
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p>"Dr. Ahmadian completely transformed my smile. The veneer process was painless and the staff was incredibly professional."</p>
+                <div class="reviewer-info">
+                    <img src="https://via.placeholder.com/40" alt="Sarah J.">
+                    <strong>Sarah J.</strong> <span style="margin-left: 5px; color: #777; font-size: 0.8rem;"> - Verified Patient</span>
+                </div>
+            </div>
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p>"I had a dental emergency and booked online easily. They got me in the same day and saved my tooth!"</p>
+                <div class="reviewer-info">
+                    <img src="https://via.placeholder.com/40" alt="Mark T.">
+                    <strong>Mark T.</strong> <span style="margin-left: 5px; color: #777; font-size: 0.8rem;"> - Verified Patient</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Professional Email & Smart Contact Workflow -->
+    <section id="contact" class="contact-section">
+        <div>
+            <h2>Contact Us</h2>
+            <br>
+            <!-- Gmail fixed to Google Workspace Email -->
+            <p><strong>Email:</strong> info@smilegalleryofaustin.com</p>
+            <p><strong>Phone:</strong> (512) 257-1945</p>
+            <p><strong>Address:</strong> 1234 Dental Way, Austin, TX 78759</p>
+            <br>
+            <p><em>*We use enterprise-grade Google Workspace to ensure your communications remain private and secure.</em></p>
+        </div>
+        
+        <!-- Workflow Optimized Form -->
+        <div class="contact-form">
+            <div class="hipaa-badge">🔒 HIPAA Compliant Secure Form</div>
+            <h3>Request a Callback</h3>
+            <p style="font-size: 0.9rem; margin-bottom: 1rem;">Fill this out and our automated system will text you within 15 minutes to confirm.</p>
+            
+            <form action="YOUR_ZAPIER_OR_MAKE_WEBHOOK_URL_HERE" method="POST">
+                <input type="text" placeholder="Full Name" required>
+                <input type="tel" placeholder="Phone Number" required>
+                <textarea rows="4" placeholder="How can we help you today?" required></textarea>
+                <button type="submit" class="btn-cta" style="width: 100%; border: none; cursor: pointer;">Send Secure Request</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- 6. Modern Footer & Dynamic Copyright -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h4>Operating Hours</h4>
+                <p>Mon - Thu: 8:00 AM - 5:00 PM</p>
+                <p>Fri: 8:00 AM - 2:00 PM</p>
+                <p>Sat - Sun: Closed</p>
+            </div>
+            <div>
+                <h4>Accessibility & Privacy</h4>
+                <a href="#" style="color: #aaa;">Privacy Policy</a><br>
+                <a href="#" style="color: #aaa;">Terms of Service</a><br>
+                <div class="ada-badge">♿ ADA Compliant Website</div>
+            </div>
+        </div>
+        <!-- Dynamic JS Year -->
+        <p>&copy; <span id="current-year"></span> Smile Gallery of Austin. All Rights Reserved.</p>
+    </footer>
+
+    <!-- 7. Mobile UX: Tap-to-Call Sticky Footer -->
+    <div class="mobile-sticky-bar">
+        <a href="tel:5122571945" class="mobile-btn btn-call">📞 Call Now</a>
+        <a href="https://www.zocdoc.com/" target="_blank" class="mobile-btn btn-book">📅 Book Online</a>
+    </div>
+
+    <!-- Script to automatically update the copyright year -->
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
